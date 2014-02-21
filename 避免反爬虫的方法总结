@@ -1,0 +1,31 @@
+1.设置User-Agent : 
+	有些服务器或 Proxy 会通过该值来判断是否是浏览器发出的请求
+	chrome:
+		User-Agent:Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/30.0.1599.114 Safari/537.36
+
+	设置方法：
+	import urllib2  
+	request = urllib2.Request('http://www.baidu.com/')  
+	request.add_header('User-Agent', 'fake-client')       # add_header(name, value, **_params) 
+	response = urllib2.urlopen(request)  
+	print response.read()
+
+2. 设置代理 ＩＰ：
+        参考：
+		Proxy=['192.227.137.47:7808', '61.163.162.251:8000', '60.214.67.86:80', '60.29.43.130:9999', '58.252.56.148:9000', 
+		'60.195.251.213:80', '61.133.125.186:50634', '61.136.93.38:8080', '1.192.224.66:8888', '58.53.192.218:8123',
+		 '58.211.195.86:8080', '58.213.114.77:8080', '58.215.184.174:8080', '58.250.87.121:81', '58.250.87.122:81', 
+		'59.57.15.71:80', '60.214.67.86:8080', '59.124.2.233:80', '59.172.208.190:8080', '61.158.172.145:8080', 
+		'59.148.224.190:80', '61.164.184.66:8080', '61.134.38.42:7280', '61.153.236.30:8080', '59.172.208.186:8080', 
+		'61.167.49.188:8080', '61.143.61.92:52013', '61.175.223.139:3128', '61.175.223.141:3128', '60.195.251.202:80', 
+		'60.223.255.141:8080', '60.223.228.2:8080', '60.5.254.168:8081', '61.134.62.119:9999', '60.216.99.222:80']
+
+	import urllib2  
+	enable_proxy = True  
+	proxy_handler = urllib2.ProxyHandler({"http" : 'http://some-proxy.com:8080'})  
+	null_proxy_handler = urllib2.ProxyHandler({}) # 不设置代理 
+	if enable_proxy:  
+	    opener = urllib2.build_opener(proxy_handler)  
+	else:  
+	    opener = urllib2.build_opener(null_proxy_handler)  
+	urllib2.install_opener(opener)  
